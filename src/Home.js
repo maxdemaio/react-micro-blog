@@ -3,9 +3,10 @@ import BlogList from './BlogList';
 
 // Parent component
 const Home = () => {
-    // Start out blogs as null, fetch from useEffect
+    // Start out blogs as null and loading true, fetch from useEffect
     const [blogs, setBlogs] = useState(null);
-    
+    const [isPending, setIsPending] = useState(true);
+
     // Function to run every re-render
     // Or run function whenever specific state changes
     // Empty array just means on initial load
@@ -17,7 +18,8 @@ const Home = () => {
                 return res.json()
             }).then((data) => {
                 // Update blog state
-                setBlogs(data)
+                setBlogs(data);
+                setIsPending(false);
             })
     }, []);
 
@@ -25,6 +27,7 @@ const Home = () => {
         <div className="home">
             {/* Child component */}
             {/* Make sure blogs is not null */}
+            {isPending && <div>Loading...</div>}
             {blogs && <BlogList blogs={blogs} title="All Blogs" />}
         </div>
     );
