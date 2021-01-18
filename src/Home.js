@@ -1,18 +1,31 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import BlogList from './BlogList';
 
 // Parent component
 const Home = () => {
-    const [blogs, setBlogs] = useState([
-        { title: 'My new website', body: 'lorem ipsum...', author: 'Max', id: 1 },
-        { title: 'Welcome party!', body: 'lorem ipsum...', author: 'Alice', id: 2 },
-        { title: 'Web dev top tips', body: 'lorem ipsum...', author: 'Scout', id: 3 }
-    ]);
+    // Start out blogs as null, fetch from useEffect
+    const [blogs, setBlogs] = useState(null);
+    
+    // Function to run every re-render
+    // Or run function whenever specific state changes
+    // Empty array just means on initial load
+    useEffect(() => {
+        // response object
+        // use json method on it
+        fetch('http://localhost:8000/blogs')
+            .then(res => {
+                return res.json()
+            }).then((data) => {
+                // Update blog state
+                setBlogs(data)
+            })
+    }, []);
 
     return (  
         <div className="home">
             {/* Child component */}
-            <BlogList blogs={blogs} title="All Blogs" />
+            {/* Make sure blogs is not null */}
+            {blogs && <BlogList blogs={blogs} title="All Blogs" />}
         </div>
     );
 }
