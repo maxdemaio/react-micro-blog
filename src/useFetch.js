@@ -10,9 +10,12 @@ const useFetch = (url) => {
     // Or we can run function whenever specific state changes
     // Empty array just means on initial load
     useEffect(() => {
+        // If component unmounts, abort
+        const abortCont = new AbortController();
+
         // response object
         // use json method on it
-        fetch(url)
+        fetch(url, {signal: abortCont.signal })
             .then(res => {
                 if (!res.ok) {
                     throw Error('Could not fetch data for that resource');
@@ -25,11 +28,18 @@ const useFetch = (url) => {
                 setError(null);
             })
             .catch((e) => {
-                // Log any errors to state
-                setIsPending(false);
-                setError(e.message);
+                // Check for abort errors, don't udpate states
+                if (e.name === 'AbortError') {
+                    console.log('fetch aborted');
+                } else {
+                    // Log any errors to state
+                    setIsPending(false);
+                    setError(e.message);
+                }
             })
-    }, ['url']);
+
+        return () => abortCont.abort();
+    }, [url]);
 
     return {data, isPending, error};
 }
