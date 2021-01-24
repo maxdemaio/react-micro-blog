@@ -1,8 +1,15 @@
 # React Micro Blog
 
-![Blog preview picture](blogPreview.png)
+![Blog preview gif](ReactBlog-preview.gif)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Project Description
+Blog created in React bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+- The home page allows readers to see blog post titles and their authors, allowing them to click on posts to see further detail.
+
+- On the detail page of a blog post, all information about the blog post is displayed after fetching the information from the JSON server. One can also make a delete request to remove the blog, and return to the home page.
+
+- To create blog posts, simply navigate to the '/create' route and submit the form. This data is processed via fetch request and added to the JSON server. 
 
 ## Available Scripts
 

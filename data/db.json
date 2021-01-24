@@ -11,6 +11,30 @@
       "body": "I am currently learning React",
       "author": "max",
       "id": 3
+    },
+    {
+      "title": "Serving Production Ready Static Files - Flask",
+      "body": "Try out Flask Static Digest to md5 hash your static files, and serve them from Amazon S3 buckets!",
+      "author": "max",
+      "id": 4
+    },
+    {
+      "title": "Go Programming",
+      "body": "All about Go",
+      "author": "alice",
+      "id": 5
+    },
+    {
+      "title": "Django + React Guide",
+      "body": "This is a guide for Django and React!",
+      "author": "alice",
+      "id": 6
+    },
+    {
+      "title": "What's New in Angular?",
+      "body": "Lots of new updates!",
+      "author": "max",
+      "id": 7
     }
   ]
 }
